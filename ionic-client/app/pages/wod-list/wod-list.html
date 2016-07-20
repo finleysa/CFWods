@@ -16,7 +16,7 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let wod of wods">
+    <button ion-item *ngFor="let wod of wods" (click)="goToDetails($event, wod.name)">
       <ion-avatar item-left>
         <h2>{{ wod.name }}</h2>
       </ion-avatar>

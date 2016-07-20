@@ -8,11 +8,20 @@ class Girl extends Wod {
 
   static findAll(fn) {
     let girls = global.db.crossfit.collection('girls');
-    girls.find().toArray(function(err, docs) {
+    girls.find().sort({name: 1}).toArray(function(err, docs) {
       if (err) { console.log(err) }
       else {
-        console.log(docs);
         fn(docs);
+      }
+    });
+  }
+
+  static findOne(name, fn) {
+    let girls = global.db.crossfit.collection('girls');
+    girls.findOne({name: name}, (err, doc) => {
+      if (err) { console.log(err) }
+      else {
+        fn(doc);
       }
     });
   }

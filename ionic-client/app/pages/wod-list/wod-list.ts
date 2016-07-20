@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { WodsService } from '../../providers/wods-service/wods-service';
 import { Wod } from '../../models/wod';
+import { WodDetailPage } from '../wod-detail/wod-detail';
 /*
   Generated class for the WodListPage page.
 
@@ -15,10 +16,15 @@ import { Wod } from '../../models/wod';
 export class WodListPage {
   wods: Array<Wod>;
 
-  constructor(private nav: NavController, public wodsService: WodsService) {
+  constructor(public nav: NavController, private wodsService: WodsService) {
     wodsService
       .load()
       .then(wods => this.wods = wods);
   }
 
+  goToDetails(event, wod) {
+    this.nav.push(WodDetailPage, {
+      wod: wod
+    });
+  }
 }

@@ -34,8 +34,17 @@ export class WodsService {
           // we've got back the raw data, now generate the core schedule data
           // and save the data for later reference
           this.data = data;
-          console.log(data);
           resolve(this.data);
+        });
+    });
+  }
+
+  loadDetails(name: string) {
+    return new Promise<Wod>(resolve => {
+      this.http.get(`http://localhost:3000/wods/${name}`)
+        .map(res => <Wod>(res.json()))
+        .subscribe(wod => {
+          resolve(wod);
         });
     });
   }

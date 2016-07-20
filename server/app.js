@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongo = require('./bin/mongo-init');
-
 var wods = require('./routes/wods');
+
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -29,9 +29,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(allowCrossDomain);
+
+app.use('/wods/:wod', wods.findOne);
 app.use('/wods', wods.findAll);
-// app.use('/wods/new', wods.insert);
-// app.use('/wods/:wod', wods.SelectWod);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

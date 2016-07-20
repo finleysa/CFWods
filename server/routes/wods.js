@@ -9,11 +9,13 @@ exports.SelectWod = (req, res) => {
 exports.findAll = (req, res) => {
   Girl.findAll((docs) =>
   {
-    console.log(docs);
     res.json(docs);
   });
 }
 
-exports.insert = (req, res) => {
-  res.send('testing');
+exports.findOne = (req, res) => {
+  Girl.findOne(req.params.wod, (doc) =>
+  {
+      res.json(doc);
+  });
 }
